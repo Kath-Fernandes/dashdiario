@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Início de Dia</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Premium Earthy Pastel Palette */
+            --bg-color: #F4EFEA;
+            /* Very light sand */
+            --text-main: #4A3E39;
+            /* Deep earthy brown */
+            --text-light: #8A7970;
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --border-color: rgba(255, 255, 255, 0.5);
+            --terracotta: #D08C7A;
+            --sage: #A0B29A;
+            --mustard: #E2C792;
+            --clay: #C2A89F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Aurora Background Elements */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        body::before {
+            background: var(--terracotta);
+            top: -150px;
+            left: -150px;
+        }
+
+        body::after {
+            background: var(--sage);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        .blob-3 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: var(--mustard);
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            z-index: -1;
+            top: 30%;
+            left: 20%;
+            animation: float 25s infinite ease-in-out alternate-reverse;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(150px, 80px) scale(1.1);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header / Hero */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 3.5rem 2rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.02), inset 0 2px 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .date {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+
+        /* Inspiration Quote */
+        .inspiration {
+            margin: -4rem auto 4rem auto;
+            max-width: 700px;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--text-light);
+            padding: 2rem 3rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03), inset 0 2px 5px rgba(255, 255, 255, 1);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Google Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 32px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02), inset 0 2px 5px rgba(255, 255, 255, 0.7);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.05), inset 0 2px 5px rgba(255, 255, 255, 1);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .card:nth-child(1)::before {
+            background: var(--terracotta);
+        }
+
+        .card:nth-child(2)::before {
+            background: var(--mustard);
+        }
+
+        .card:nth-child(3)::before {
+            background: var(--sage);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .card-number {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        /* Login Button */
+        .login-btn {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 1.2rem 3rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+            background-color: var(--bg-color);
+        }
+
+        /* Main Content Grid (Tasks & Calendar) */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            width: 100%;
+        }
+
+        .task-section,
+        .calendar-section {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 36px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.02), inset 0 2px 5px rgba(255, 255, 255, 0.7);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .task-section:hover,
+        .calendar-section:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04), inset 0 2px 5px rgba(255, 255, 255, 1);
+        }
+
+        .task-section h2,
+        .calendar-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--terracotta);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .calendar-section h2 {
+            color: var(--sage);
+        }
+
+        /* Tasks Custom CSS */
+        .task-input-group {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        #new-task-input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+        }
+
+        #new-task-input:focus {
+            border-color: var(--terracotta);
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(208, 140, 122, 0.1);
+        }
+
+        #add-task-btn {
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(208, 140, 122, 0.3);
+        }
+
+        #add-task-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(208, 140, 122, 0.4);
+        }
+
+        .task-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+            max-height: 400px;
+            padding-right: 10px;
+        }
+
+        .task-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .task-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .task-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+        }
+
+        .task-item.completed {
+            opacity: 0.5;
+            background: transparent;
+            transform: scale(0.98);
+            box-shadow: none;
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: var(--terracotta);
+            transform: scale(1.2);
+        }
+
+        .task-text {
+            flex: 1;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .delete-btn {
+            background: transparent;
+            border: none;
+            color: #d17a7a;
+            cursor: pointer;
+            font-size: 1.3rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .task-item:hover .delete-btn {
+            opacity: 1;
+        }
+
+        /* Calendar Custom CSS */
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text-main);
+            padding: 0 1rem;
+        }
+
+        .calendar-header button {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-main);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .calendar-header button:hover {
+            background: var(--sage);
+            color: white;
+            border-color: var(--sage);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(160, 178, 154, 0.3);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            flex: 1;
+        }
+
+        .day-header {
+            text-align: center;
+            font-weight: 700;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            padding-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calendar-day {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            min-height: 95px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+        }
+
+        .calendar-day:hover {
+            border-color: var(--sage);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(160, 178, 154, 0.2);
+            background: #FFFFFF;
+        }
+
+        .calendar-day.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .calendar-day.empty:hover {
+            transform: none;
+        }
+
+        .calendar-day.today {
+            border-color: var(--sage);
+            border-width: 2px;
+            background: rgba(160, 178, 154, 0.1);
+        }
+
+        .day-number {
+            font-weight: 800;
+            font-size: 1.1rem;
+            align-self: flex-end;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .day-event {
+            background: var(--mustard);
+            color: #5C4B41;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 5px 8px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
+        }
+
+        .day-event:hover {
+            text-decoration: line-through;
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 4rem;
+            }
+
+            .inspiration {
+                font-size: 2rem;
+                margin: -2.5rem 1rem 3rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .card,
+            .task-section,
+            .calendar-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .calendar-day {
+                min-height: 80px;
+                padding: 6px;
+            }
+
+            .day-number {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob-3"></div>
+    <div class="container">
+        <header>
+            <div class="date" id="current-date">Data</div>
+            <h1>Por onde começo hoje?</h1>
+        </header>
+        <br>
+        <br>
+        <br>
+        <div class="inspiration" id="daily-inspiration">
+            "Acredite que você pode, e você já está no meio do caminho." ✨
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="dashboard-grid" id="dashboard-grid">
+            <div class="card">
+                <div class="card-icon" style="color: var(--terracotta)">📌</div>
+                <div class="card-title">Eventos Hoje</div>
+                <div class="card-number" id="stat-today">0</div>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="color: var(--mustard)">📅</div>
+                <div class="card-title">Eventos na Semana</div>
+                <div class="card-number" id="stat-week">0</div>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="color: var(--sage)">📋</div>
+                <div class="card-title">Tarefas Pendentes</div>
+                <div class="card-number" id="stat-tasks">0</div>
+            </div>
+        </div>
+
+        <div class="main-content" id="main-content">
+            <!-- Tarefas Manuais -->
+            <div class="task-section">
+                <h2>Minhas Tarefas</h2>
+                <div class="task-input-group">
+                    <input type="text" id="new-task-input" placeholder="O que você precisa fazer hoje?"
+                        onkeypress="if(event.key === 'Enter') document.getElementById('add-task-btn').click()">
+                    <button id="add-task-btn">Adicionar</button>
+                </div>
+                <ul class="task-list" id="task-list">
+                    <!-- Tasks injected by JS -->
+                </ul>
+            </div>
+
+            <!-- Calendário Interativo -->
+            <div class="calendar-section">
+                <h2>Meu Calendário de Estudos</h2>
+                <div class="calendar-header">
+                    <button id="prev-month">&lt;</button>
+                    <span id="month-year-display">Mês Ano</span>
+                    <button id="next-month">&gt;</button>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar days injected by JS -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Array de frases inspiradoras
+        const quotes = [
+            '"O sucesso é a soma de pequenos esforços repetidos dia após dia." ✨',
+            '"Acredite que você pode, e você já está no meio do caminho." 🚀',
+            '"Comece de onde você está. Use o que você tem. Faça o que você pode." 💪',
+            '"Não importa a velocidade que você avança, desde que você não pare." 🐢',
+            '"A única maneira de fazer um ótimo trabalho é amar o que você faz." ❤️',
+            '"Tudo o que você sempre quis está do outro lado do medo." 🌟',
+            '"A inspiração existe, mas ela tem que te encontrar trabalhando." 🎨',
+            '"Pequenos progressos todos os dias adicionam grandes resultados." 🌱',
+            '"Sua única limitação é aquela que você impõe a si mesmo." 🔓',
+            '"Grandes coisas nunca vêm de zonas de conforto." 🏔️',
+            '"Você não precisa ser grande para começar, mas precisa começar para ser grande." 🎯',
+            '"O segredo de progredir é começar." ⏳',
+            '"Se você pode sonhar, você pode realizar." 🌈',
+            '"Faça hoje algo que seu eu do futuro agradecerá." 🌻'
+        ];
+
+        // Atualizar data atual automaticamente
+        const now = new Date();
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        document.getElementById('current-date').innerText = now.toLocaleDateString('pt-BR', options);
+
+        // Selecionar uma frase baseada no dia do ano
+        const startOfYear = new Date(now.getFullYear(), 0, 0);
+        const diff = now - startOfYear;
+        const oneDay = 1000 * 60 * 60 * 24;
+        const dayOfYear = Math.floor(diff / oneDay);
+        const dailyQuote = quotes[dayOfYear % quotes.length];
+        document.getElementById('daily-inspiration').innerText = dailyQuote;
+
+        // --- Tarefas Manuais Locais (LocalStorage) ---
+        let tasks = JSON.parse(localStorage.getItem('minhasTarefas')) || [];
+
+        function renderTasks() {
+            const list = document.getElementById('task-list');
+            list.innerHTML = '';
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.className = `task-item ${task.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${index})">
+                    <span class="task-text">${task.text}</span>
+                    <button class="delete-btn" onclick="deleteTask(${index})" title="Excluir">✖</button>
+                `;
+                list.appendChild(li);
+            });
+            localStorage.setItem('minhasTarefas', JSON.stringify(tasks));
+        }
+
+        document.getElementById('add-task-btn').onclick = () => {
+            const input = document.getElementById('new-task-input');
+            const text = input.value.trim();
+            if (text) {
+                tasks.push({ text, completed: false });
+                input.value = '';
+                renderTasks();
+            }
+        };
+
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            renderTasks();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            renderTasks();
+        }
+
+        // --- Calendário Interativo Local (LocalStorage) ---
+        let currentDate = new Date();
+        let calendarEvents = JSON.parse(localStorage.getItem('meuCalendario')) || {};
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            document.getElementById('month-year-display').innerText = `${monthNames[month]} ${year}`;
+
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = `
+                <div class="day-header">Dom</div><div class="day-header">Seg</div><div class="day-header">Ter</div>
+                <div class="day-header">Qua</div><div class="day-header">Qui</div><div class="day-header">Sex</div><div class="day-header">Sáb</div>
+            `;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                grid.innerHTML += `<div class="calendar-day empty"></div>`;
+            }
+
+            const today = new Date();
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const isToday = today.getDate() === i && today.getMonth() === month && today.getFullYear() === year;
+
+                const dayDiv = document.createElement('div');
+                dayDiv.className = `calendar-day ${isToday ? 'today' : ''}`;
+                dayDiv.onclick = () => promptAddEvent(dateKey);
+
+                let eventsHtml = '';
+                if (calendarEvents[dateKey]) {
+                    calendarEvents[dateKey].forEach((evt, idx) => {
+                        eventsHtml += `<div class="day-event" onclick="event.stopPropagation(); deleteEvent('${dateKey}', ${idx})" title="Clique para remover">${evt}</div>`;
+                    });
+                }
+
+                dayDiv.innerHTML = `
+                    <div class="day-number">${i}</div>
+                    ${eventsHtml}
+                `;
+                grid.appendChild(dayDiv);
+            }
+        }
+
+        function promptAddEvent(dateKey) {
+            const evt = prompt(`Adicionar estudo ou tarefa para o dia ${dateKey.split('-').reverse().join('/')}:`);
+            if (evt && evt.trim() !== '') {
+                if (!calendarEvents[dateKey]) calendarEvents[dateKey] = [];
+                calendarEvents[dateKey].push(evt.trim());
+                localStorage.setItem('meuCalendario', JSON.stringify(calendarEvents));
+                renderCalendar();
+            }
+        }
+
+        function deleteEvent(dateKey, idx) {
+            if (confirm("Deletar este item do calendário?")) {
+                calendarEvents[dateKey].splice(idx, 1);
+                localStorage.setItem('meuCalendario', JSON.stringify(calendarEvents));
+                renderCalendar();
+            }
+        }
+
+        document.getElementById('prev-month').onclick = () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        };
+
+        document.getElementById('next-month').onclick = () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        };
+
+        // --- Atualização de Estatísticas Locais ---
+        function updateStats() {
+            // 1. Tarefas Pendentes
+            const pendingTasksCount = tasks.filter(t => !t.completed).length;
+            document.getElementById('stat-tasks').innerText = pendingTasksCount;
+
+            // 2. Eventos Hoje & Eventos na Semana
+            let eventsTodayCount = 0;
+            let eventsWeekCount = 0;
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            function formatDateKey(d) {
+                return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            }
+
+            const todayKey = formatDateKey(today);
+            if (calendarEvents[todayKey]) {
+                eventsTodayCount = calendarEvents[todayKey].length;
+            }
+
+            // Próximos 7 dias
+            for (let i = 0; i < 7; i++) {
+                const targetDate = new Date(today);
+                targetDate.setDate(today.getDate() + i);
+                const targetKey = formatDateKey(targetDate);
+
+                if (calendarEvents[targetKey]) {
+                    eventsWeekCount += calendarEvents[targetKey].length;
+                }
+            }
+
+            document.getElementById('stat-today').innerText = eventsTodayCount;
+            document.getElementById('stat-week').innerText = eventsWeekCount;
+        }
+
+        // Adicionando a atualização das estatísticas nos renders originais
+        const originalRenderTasks = renderTasks;
+        renderTasks = function () {
+            originalRenderTasks();
+            updateStats();
+        };
+
+        const originalRenderCalendar = renderCalendar;
+        renderCalendar = function () {
+            originalRenderCalendar();
+            updateStats();
+        };
+
+        // Render inicial das views locais
+        renderTasks();
+        renderCalendar();
+        updateStats();
+
+    </script>
+</body>
+
+</html>
